@@ -9,8 +9,8 @@ import './index.css'
 //import { TrafficLight } from './02-useEffect/TrafficLight';
 //import { TrafficLightWithEffect } from './02-useEffect/TrafficLightWithEffect';
 //import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook';
-import { PokemonPage } from './03-examples/PokemonPages';
-//import {FocusScreen} from './04-useRef/FocusScreen';
+//import { PokemonPage } from './03-examples/PokemonPages';
+import {FocusScreen} from './04-useRef/FocusScreen';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -20,8 +20,9 @@ createRoot(document.getElementById('root')!).render(
    {/*<TrafficLight/>*/}
    {/*<TrafficLightWithEffect/>*/}
    {/*<TrafficLightWithHook/>/*/}
-    <PokemonPage/>
-   {/*<FocusScreen/>*/}
+   {/*<PokemonPage/>*/}
+   
+   <FocusScreen/>
 
   </StrictMode>
 )
