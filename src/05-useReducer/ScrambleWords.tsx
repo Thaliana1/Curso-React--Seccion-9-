@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
 import { SkipForward, Play } from 'lucide-react';
+import { set } from 'zod';
+import confetti from 'canvas-confetti';
 
 const GAME_WORDS = [
   'REACT',
@@ -61,18 +63,63 @@ export const ScrambleWords = () => {
     // Previene el refresh de la página
     e.preventDefault();
     // Implementar lógica de juego
-    console.log('Intento de adivinanza:', guess, currentWord);
+    //console.log('Intento de adivinanza:', guess, currentWord);
+    
+    if (guess === currentWord){
+      const newWords = words.slice(1);              //si adivina la palabra, se aumenta el puntaje
+      
+      confetti({
+        particleCount: 100,
+        spread: 120,
+        origin:{y:0.6},
+      });
+
+
+      setPoints(points + 1);
+      setGuess('');
+      setWords(newWords);                           //quitar las palabras del arreglode palabra
+      setCurrentWord(newWords[0]);                  //cual es la palabra que quiero evaluar
+      setScrambledWord(scrambleWord(newWords[0]));  //el scramble de la palabra
+      return;
+    }
+
+    //ACABAR EL JUEGO
+    setErrorCounter(errorCounter + 1);
+    setGuess('');
+
+    if( errorCounter + 1 === maxAllowErrors){
+      setIsGameOver(true);
+    }
 
   };
 
+  //Funcion para el boton saltar
   const handleSkip = () => {
-    console.log('Palabra saltada');
+    if ( skipCounter >= maxSkips) return;
+
+    //si se tiene el skip 
+    const updatwWords = words.slice(1);
+    setSkipCounter(skipCounter + 1);
+    setWords(updatwWords);
+    setCurrentWord(updatwWords[0]);
+    setScrambledWord(scrambleWord(updatwWords[0]));
+    setGuess('');
 
     
   };
 
+  //Funcion para el boton jugar de nuevo- limpieza 
   const handlePlayAgain = () => {
-    console.log('Jugar de nuevo');
+    const newArray = shuffleArray(GAME_WORDS);
+
+    setPoints(0);
+    setErrorCounter(0);
+    setGuess('');
+    setWords(newArray);
+    setCurrentWord(newArray[0]);
+    setIsGameOver(false);
+    setSkipCounter(0);
+    setScrambledWord(scrambleWord(newArray[0]));
     
   };
 

@@ -5,7 +5,6 @@ import { createRoot } from 'react-dom/client';
 import './index.css'
 
 
-
 //import { HooksApp } from './04-hooks-app/HooksApp';
 //import { TrafficLight } from './02-useEffect/TrafficLight';
 //import { TrafficLightWithEffect } from './02-useEffect/TrafficLightWithEffect';
